@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Head from 'next/head';
 import db from '../db.json';
@@ -28,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
 
 const { theme } = db;
 
+// eslint-disable-next-line react/prop-types
 function App({ Component, pageProps }) {
   return (
     <>
@@ -43,10 +43,5 @@ function App({ Component, pageProps }) {
     </>
   );
 }
-
-App.propTypes = {
-  Component: PropTypes.element.isRequired,
-  pageProps: PropTypes.element.isRequired,
-};
 
 export default App;

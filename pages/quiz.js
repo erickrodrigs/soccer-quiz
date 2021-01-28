@@ -21,7 +21,9 @@ function LoadingWidget() {
   );
 }
 
-function QuestionWidget({ question, totalQuestions, questionIndex }) {
+function QuestionWidget({
+  question, totalQuestions, questionIndex, onSubmit,
+}) {
   const questionId = `question__${questionIndex}`;
 
   return (
@@ -50,10 +52,16 @@ function QuestionWidget({ question, totalQuestions, questionIndex }) {
           {question.description}
         </p>
 
-        <form>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            onSubmit();
+          }}
+        >
           {question.alternatives.map((alternative, index) => (
             <Widget.Topic
               as="label"
+              key={alternative}
               htmlFor={`alternative__${index}`}
             >
               <input
@@ -84,6 +92,7 @@ QuestionWidget.propTypes = {
   }),
   totalQuestions: PropTypes.number.isRequired,
   questionIndex: PropTypes.number.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 QuestionWidget.defaultProps = {
@@ -98,7 +107,8 @@ const screenStates = {
 
 export default function QuizPage() {
   const [screenState, setScreenState] = useState(screenStates.LOADING);
-  const questionIndex = 0;
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const questionIndex = currentQuestion;
   const question = db.questions[questionIndex];
   const totalQuestions = db.questions.length;
 
@@ -107,6 +117,16 @@ export default function QuizPage() {
       setScreenState(screenStates.LOADED);
     }, 1 * 1000);
   }, []);
+
+  function handleSubmit() {
+    const nextQuestion = questionIndex + 1;
+
+    if (nextQuestion < totalQuestions) {
+      setCurrentQuestion(questionIndex + 1);
+    } else {
+      setScreenState(screenStates.RESULT);
+    }
+  }
 
   return (
     <QuizBackground backgroundImage={db.bg}>
@@ -118,6 +138,7 @@ export default function QuizPage() {
             question={question}
             questionIndex={questionIndex}
             totalQuestions={totalQuestions}
+            onSubmit={handleSubmit}
           />
         )}
 

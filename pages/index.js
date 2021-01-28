@@ -7,6 +7,7 @@ import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
 import QuizLogo from '../src/components/QuizLogo';
 import QuizBackground from '../src/components/QuizBackground';
+import Input from '../src/components/Input';
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -18,13 +19,6 @@ export const QuizContainer = styled.div`
     margin: auto;
     padding: 15px;
   }
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 40px;
-  padding-left: 16px;
-  border-radius: ${({ theme }) => theme.borderRadius};
 `;
 
 const Button = styled.button`
@@ -57,6 +51,7 @@ export default function Home() {
             }}
             >
               <Input
+                name="user_name"
                 type="text"
                 placeholder="Diz seu nome aí"
                 onChange={(event) => setName(event.target.value)}

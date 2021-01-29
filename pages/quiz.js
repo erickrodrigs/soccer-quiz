@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import AlternativesForm from '../src/components/AlternativesForm';
 import QuizContainer from '../src/components/QuizContainer';
 import QuizBackground from '../src/components/QuizBackground';
 import QuizLogo from '../src/components/QuizLogo';
@@ -91,7 +92,7 @@ function QuestionWidget({
           {question.description}
         </p>
 
-        <form
+        <AlternativesForm
           onSubmit={(event) => {
             event.preventDefault();
             setIsQuestionSubmitted(true);
@@ -111,14 +112,19 @@ function QuestionWidget({
         >
           {question.alternatives.map((alternative, index) => {
             const alternativeId = `alternative__${index}`;
+            const alternativeStatus = isCorrect ? 'SUCCESS' : 'ERROR';
+            const isSelected = selectedAlternative === index;
 
             return (
               <Widget.Topic
                 as="label"
                 key={alternativeId}
                 htmlFor={alternativeId}
+                data-selected={isSelected}
+                data-status={isQuestionSubmitted && alternativeStatus}
               >
                 <input
+                  style={{ display: 'none' }}
                   id={alternativeId}
                   name={questionId}
                   type="radio"
@@ -135,7 +141,7 @@ function QuestionWidget({
 
           { isQuestionSubmitted && isCorrect && <p>Você acertou!</p> }
           { isQuestionSubmitted && !isCorrect && <p>Você errou!</p> }
-        </form>
+        </AlternativesForm>
       </Widget.Content>
     </Widget>
   );

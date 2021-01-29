@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Loader from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 import AlternativesForm from '../src/components/AlternativesForm';
 import QuizContainer from '../src/components/QuizContainer';
@@ -51,8 +52,19 @@ function LoadingWidget() {
         Carregando...
       </Widget.Header>
 
-      <Widget.Content>
-        [Desafio do Loading]
+      <Widget.Content
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}
+      >
+        <Loader
+          type="Oval"
+          color="#FFFFFF"
+          width={80}
+          height={80}
+        />
       </Widget.Content>
     </Widget>
   );

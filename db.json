@@ -65,7 +65,7 @@
     }
   ],
   "external": [
-    ""
+    "https://pato-quiz-nextjs.theedouglasam.vercel.app/"
   ],
   "theme": {
     "colors": {

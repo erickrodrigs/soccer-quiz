@@ -45,18 +45,23 @@ export default function Home() {
             <h1>Quiz da galera</h1>
           </Widget.Header>
           <Widget.Content>
-            <form onSubmit={(event) => {
-              event.preventDefault();
-            }}
-            >
-              <Input
-                type="text"
-                placeholder="Coloque o user do github"
-              />
-              <Button type="submit">
-                Jogar
-              </Button>
-            </form>
+            <ul>
+              {db.external.map((link) => {
+                const [project, user] = link
+                  .replace(/\//g, '')
+                  .replace('https:', '')
+                  .replace('.vercel-app', '')
+                  .split('.');
+
+                return (
+                  <li key={link}>
+                    <Widget.Topic href={link}>
+                      {`${user}/${project}`}
+                    </Widget.Topic>
+                  </li>
+                );
+              })}
+            </ul>
           </Widget.Content>
         </Widget>
         <Footer />

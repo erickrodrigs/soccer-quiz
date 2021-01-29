@@ -4,25 +4,63 @@
   "description": "Teste os seus conhecimentos sobre CSS e vamos ver quantos layouts você vai deixar de quebrar",
   "questions": [
     {
-      "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
-      "title": "Como fazer um seletor por id via CSS?",
-      "description": "Essa é pra aquecer",
-      "answer": 2,
+      "image": "https://static-wp-tor15-prd.torcedores.com/wp-content/uploads/2018/11/cbf4.jpg",
+      "title": "Seleção brasileira",
+      "description": "Quantas copas do mundo a seleção brasileira já ganhou na história?",
+      "answer": 0,
       "alternatives": [
-        ".elemento",
-        "*elemento",
-        "#elemento",
-        "%elemento"
+        "5",
+        "6",
+        "7",
+        "4"
       ]
     },
     {
-      "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-      "title": "Como fazer um background gradiente com css?",
-      "description": "Faz tempo em haha",
-      "answer": 0,
+      "image": "https://imgcentauro-a.akamaihd.net/400x400/M0AEH900/placar-de-substituicao-duplo-kief-manual-vagalume-img.jpg",
+      "title": "Futebol em geral",
+      "description": "Tradicionalmente, quantos jogadores podem ser substituídos de cada time durante uma partida de futebol?",
+      "answer": 3,
       "alternatives": [
-         "background: linear-gradient(#e66465, #9198e5);",
-         "background: gradient(#e66465, #9198e5);"
+        "7",
+        "1",
+        "5",
+        "3"
+      ]
+    },
+    {
+      "image": "https://static-wp-tor15-prd.torcedores.com/wp-content/uploads/2018/11/cbf4.jpg",
+      "title": "Seleção brasileira",
+      "description": "Quando foi a última vez que o Brasil foi campeão mundial de futebol?",
+      "answer": 2,
+      "alternatives": [
+        "1994, nos EUA",
+        "1998, na França",
+        "2002, no Japão e Coréia do Sul",
+        "2006, na Austrália"
+      ]
+    },
+    {
+      "image": "https://i1.r7.com/data/files/2C95/948F/3719/B4A9/0137/224A/E607/7F5C/neymar-peruca-400x400.jpg",
+      "title": "Adulto Ney",
+      "description": "Qual o campeonato nacional que o Neymar joga pelo seu time?",
+      "answer": 2,
+      "alternatives": [
+        "Campeonato Brasileiro",
+        "La Liga",
+        "Ligue 1",
+        "Premier League"
+      ]
+    },
+    {
+      "image": "https://s2.glbimg.com/-5sMbpG0siUsB3VzgkH5N3ki_ao=/400x400/e.glbimg.com/og/ed/f/original/2013/12/04/brazuca_div.jpg",
+      "title": "Copa do mundo",
+      "description": "Qual o maior artilheiro em Copas do Mundo?",
+      "answer": 3,
+      "alternatives": [
+        "Rivaldo",
+        "Ronaldo",
+        "Ronaldinho Gaúcho",
+        "Miroslav Klose"
       ]
     }
   ],

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Loader from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 import AlternativesForm from '../src/components/AlternativesForm';
@@ -10,6 +11,9 @@ import db from '../db.json';
 import Button from '../src/components/Button';
 
 function ResultWidget({ results }) {
+  const router = useRouter();
+  const username = router.query.name;
+
   return (
     <Widget>
       <Widget.Header>
@@ -18,6 +22,8 @@ function ResultWidget({ results }) {
 
       <Widget.Content>
         <p>
+          Mandou bem,
+          {` ${username}! `}
           Você acertou
           {' '}
           { results.reduce((acc, result) => (result ? acc + 1 : acc), 0) }
@@ -30,12 +36,27 @@ function ResultWidget({ results }) {
 
             return (
               <li key={resultId}>
-                {`#${index + 1} resultado: `}
+                {`#${index + 1} `}
                 {result ? 'Acertou!' : 'Errou!'}
               </li>
             );
           })}
         </ul>
+
+        <button
+          type="button"
+          style={{
+            display: 'inline-block',
+            backgroundColor: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            textDecoration: 'underline',
+            color: '#FFFFFF',
+          }}
+          onClick={() => router.back()}
+        >
+          Voltar para a home
+        </button>
       </Widget.Content>
     </Widget>
   );

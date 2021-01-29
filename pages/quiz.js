@@ -7,6 +7,42 @@ import Widget from '../src/components/Widget';
 import db from '../db.json';
 import Button from '../src/components/Button';
 
+function ResultWidget({ results }) {
+  return (
+    <Widget>
+      <Widget.Header>
+        Resultado
+      </Widget.Header>
+
+      <Widget.Content>
+        <p>
+          Você acertou
+          {' '}
+          { results.reduce((acc, result) => (result ? acc + 1 : acc), 0) }
+          {' '}
+          perguntas
+        </p>
+        <ul>
+          {results.map((result, index) => {
+            const resultId = `result__${index}`;
+
+            return (
+              <li key={resultId}>
+                {`#${index + 1} resultado: `}
+                {result ? 'Acertou!' : 'Errou!'}
+              </li>
+            );
+          })}
+        </ul>
+      </Widget.Content>
+    </Widget>
+  );
+}
+
+ResultWidget.propTypes = {
+  results: PropTypes.arrayOf(PropTypes.bool).isRequired,
+};
+
 function LoadingWidget() {
   return (
     <Widget>
@@ -22,7 +58,7 @@ function LoadingWidget() {
 }
 
 function QuestionWidget({
-  question, totalQuestions, questionIndex, onSubmit,
+  question, totalQuestions, questionIndex, addResult, onSubmit,
 }) {
   const [selectedAlternative, setSelectedAlternative] = useState(undefined);
   const [isQuestionSubmitted, setIsQuestionSubmitted] = useState(false);
@@ -62,9 +98,12 @@ function QuestionWidget({
 
             setTimeout(() => {
               setIsQuestionSubmitted(false);
+
               document
                 .getElementById(`alternative__${selectedAlternative}`)
                 .checked = false;
+
+              addResult(isCorrect);
               setSelectedAlternative(undefined);
               onSubmit();
             }, 2 * 1000);
@@ -112,6 +151,7 @@ QuestionWidget.propTypes = {
   }),
   totalQuestions: PropTypes.number.isRequired,
   questionIndex: PropTypes.number.isRequired,
+  addResult: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
@@ -127,6 +167,7 @@ const screenStates = {
 
 export default function QuizPage() {
   const [screenState, setScreenState] = useState(screenStates.LOADING);
+  const [results, setResults] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const questionIndex = currentQuestion;
   const question = db.questions[questionIndex];
@@ -137,6 +178,10 @@ export default function QuizPage() {
       setScreenState(screenStates.LOADED);
     }, 1 * 1000);
   }, []);
+
+  function addResult(isCorrect) {
+    setResults([...results, isCorrect]);
+  }
 
   function handleSubmit() {
     const nextQuestion = questionIndex + 1;
@@ -158,11 +203,15 @@ export default function QuizPage() {
             question={question}
             questionIndex={questionIndex}
             totalQuestions={totalQuestions}
+            addResult={addResult}
             onSubmit={handleSubmit}
           />
         )}
 
         {screenState === screenStates.LOADING && <LoadingWidget />}
+
+        {screenState === screenStates.RESULT
+          && <ResultWidget results={results} />}
       </QuizContainer>
     </QuizBackground>
   );

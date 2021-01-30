@@ -1,14 +1,14 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Loader from 'react-loader-spinner';
 import PropTypes from 'prop-types';
-import AlternativesForm from '../src/components/AlternativesForm';
-import QuizContainer from '../src/components/QuizContainer';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizLogo from '../src/components/QuizLogo';
-import Widget from '../src/components/Widget';
-import db from '../db.json';
-import Button from '../src/components/Button';
+import AlternativesForm from '../../components/AlternativesForm';
+import QuizContainer from '../../components/QuizContainer';
+import QuizBackground from '../../components/QuizBackground';
+import QuizLogo from '../../components/QuizLogo';
+import Widget from '../../components/Widget';
+import Button from '../../components/Button';
 
 function ResultWidget({ results }) {
   const router = useRouter();
@@ -204,13 +204,13 @@ const screenStates = {
   RESULT: 'RESULT',
 };
 
-export default function QuizPage() {
+export default function QuizScreen({ questions, background }) {
   const [screenState, setScreenState] = useState(screenStates.LOADING);
   const [results, setResults] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const questionIndex = currentQuestion;
-  const question = db.questions[questionIndex];
-  const totalQuestions = db.questions.length;
+  const question = questions[questionIndex];
+  const totalQuestions = questions.length;
 
   useEffect(() => {
     setTimeout(() => {
@@ -233,7 +233,7 @@ export default function QuizPage() {
   }
 
   return (
-    <QuizBackground backgroundImage={db.bg}>
+    <QuizBackground backgroundImage={background}>
       <QuizContainer>
         <QuizLogo />
 
@@ -255,3 +255,14 @@ export default function QuizPage() {
     </QuizBackground>
   );
 }
+
+QuizScreen.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    answer: PropTypes.number.isRequired,
+    alternatives: PropTypes.arrayOf(PropTypes.string).isRequired,
+  })).isRequired,
+  background: PropTypes.string.isRequired,
+};

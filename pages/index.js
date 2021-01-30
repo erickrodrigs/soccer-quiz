@@ -9,6 +9,7 @@ import QuizBackground from '../src/components/QuizBackground';
 import QuizContainer from '../src/components/QuizContainer';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button';
+import Link from '../src/components/Link';
 
 export default function Home() {
   const [name, setName] = useState('');
@@ -55,7 +56,10 @@ export default function Home() {
 
                 return (
                   <li key={link}>
-                    <Widget.Topic href={`/quiz/${projectName}___${githubUser}`}>
+                    <Widget.Topic
+                      as={Link}
+                      href={`/quiz/${projectName}___${githubUser}`}
+                    >
                       {`${githubUser}/${projectName}`}
                     </Widget.Topic>
                   </li>

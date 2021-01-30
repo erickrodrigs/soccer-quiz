@@ -15,6 +15,7 @@ export default function Link({ children, href, ...props }) {
 }
 
 Link.propTypes = {
-  children: PropTypes.element.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  children: PropTypes.any.isRequired,
   href: PropTypes.string.isRequired,
 };
